@@ -39,4 +39,9 @@ public class UserDaoImpl implements UserDao {
         return jdbcTemplate.update(sql, email);
     }
 
+    public Integer updateUser(User user) {
+        String sql = "UPDATE test.users SET first_name = ?, last_name = ? WHERE email = ?";
+        return jdbcTemplate.update(sql, user.firstName, user.lastName, user.email);
+    }
+
 }

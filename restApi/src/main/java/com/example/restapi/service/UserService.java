@@ -31,4 +31,8 @@ public class UserService {
     public Integer deleteUser(String email) {
         return userDaoImpl.deleteUser(email);
     }
+
+    public Integer updateUser(User user) {
+        return userDaoImpl.updateUser(user);
+    }
 }

@@ -25,7 +25,7 @@ public interface UserDao {
     Integer createUser(User user);
 
     // UPDATE
-    // Integer updateUser(String email, User user);
+    Integer updateUser(User user);
 
     // DELETE
     Integer deleteUser(String email);

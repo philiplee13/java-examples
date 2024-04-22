@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.restapi.service.UserService;
@@ -72,10 +73,10 @@ public class RestApiApplication {
 	public ResponseEntity<UpdateResponseModel> createUser(@RequestBody User user) {
 		Integer createdUser = userService.createUser(user);
 		if (createdUser > 0) {
-			UpdateResponseModel successfulUpdateResponse = new UpdateResponseModel(createdUser, "Updated One User");
+			UpdateResponseModel successfulUpdateResponse = new UpdateResponseModel(createdUser, "Created One User");
 			return new ResponseEntity<UpdateResponseModel>(successfulUpdateResponse, HttpStatus.OK);
 		}
-		UpdateResponseModel errorResponseModel = new UpdateResponseModel(createdUser, "Did not update any user...");
+		UpdateResponseModel errorResponseModel = new UpdateResponseModel(createdUser, "Did not create any user...");
 		return new ResponseEntity<UpdateResponseModel>(errorResponseModel, HttpStatus.NOT_FOUND);
 	}
 
@@ -92,13 +93,23 @@ public class RestApiApplication {
 		return new ResponseEntity<UpdateResponseModel>(errorResponseModel, HttpStatus.NOT_FOUND);
 	}
 
+	@PutMapping("/users")
+	public ResponseEntity<UpdateResponseModel> updateUser(@RequestBody User user) {
+		Integer createdUser = userService.updateUser(user);
+		if (createdUser > 0) {
+			UpdateResponseModel successfulUpdateResponse = new UpdateResponseModel(createdUser, "Updated One User");
+			return new ResponseEntity<UpdateResponseModel>(successfulUpdateResponse, HttpStatus.OK);
+		}
+		UpdateResponseModel errorResponseModel = new UpdateResponseModel(createdUser, "Did not update any user...");
+		return new ResponseEntity<UpdateResponseModel>(errorResponseModel, HttpStatus.NOT_FOUND);
+	}
 }
 
 /*
  * to do
  * rest api - get by email - done
  * custom response and exception models - done
- * cud
+ * cud - done
  * mocking and testing
  * pagination
  */
