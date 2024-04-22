@@ -23,4 +23,12 @@ public class UserService {
     public List<User> getSingleUser(String email) {
         return userDaoImpl.getSingleUser(email);
     }
+
+    public Integer createUser(User user) {
+        return userDaoImpl.createUser(user);
+    }
+
+    public Integer deleteUser(String email) {
+        return userDaoImpl.deleteUser(email);
+    }
 }

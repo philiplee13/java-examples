@@ -13,9 +13,20 @@ import java.util.List;
 import com.example.restapi.domain.User;
 
 public interface UserDao {
+
+    // GET
     // method to get all users
     List<User> getAllUsers();
 
     // method to get individual user based on email
     List<User> getSingleUser(String email);
+
+    // CREATE
+    Integer createUser(User user);
+
+    // UPDATE
+    // Integer updateUser(String email, User user);
+
+    // DELETE
+    Integer deleteUser(String email);
 }

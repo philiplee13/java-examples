@@ -29,4 +29,14 @@ public class UserDaoImpl implements UserDao {
         return jdbcTemplate.query(sql, userRowMapper, email);
     }
 
+    public Integer createUser(User user) {
+        String sql = "INSERT INTO test.users (first_name, last_name, email) VALUES (?, ?, ?)";
+        return jdbcTemplate.update(sql, user.firstName, user.lastName, user.email);
+    }
+
+    public Integer deleteUser(String email) {
+        String sql = "DELETE FROM test.users WHERE email = ?";
+        return jdbcTemplate.update(sql, email);
+    }
+
 }
