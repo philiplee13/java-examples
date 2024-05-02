@@ -16,6 +16,7 @@ import java.util.List;
 import com.example.restapi.domain.User;
 import com.example.restapi.exceptions.GetResponseModel;
 import com.example.restapi.exceptions.UpdateResponseModel;
+import com.example.restapi.exceptions.GetResponseModelPaginated;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,16 +46,27 @@ public class RestApiApplication {
 	}
 
 	@GetMapping("/users")
-	public ResponseEntity<GetResponseModel> getUsers() {
-		List<User> allUsers = userService.getUsers();
+	public ResponseEntity<GetResponseModelPaginated> getUsers(
+			@RequestParam(defaultValue = "2") String size,
+			@RequestParam(defaultValue = "0") String page) {
+
+		// get total count of users
+		Integer totalCount = userService.getCountOfAllUsers();
+		// get all users
+		List<User> allUsers = userService.getUsers(size, page);
+
+		Integer nextStartingRow = Integer.parseInt(page) + Integer.parseInt(size); // limit + offset
+		Boolean isNextPage = nextStartingRow < totalCount; // if our next starting row is < the total size
+
 		if (allUsers.size() > 0) {
-			GetResponseModel successResponse = new GetResponseModel(
-					allUsers, "Found Users");
-			return new ResponseEntity<GetResponseModel>(successResponse, HttpStatus.OK);
+			GetResponseModelPaginated paginatedResponse = new GetResponseModelPaginated(allUsers,
+					"Found Users using pagination", isNextPage, allUsers.size());
+			return new ResponseEntity<GetResponseModelPaginated>(paginatedResponse, HttpStatus.OK);
 		}
 
-		GetResponseModel errorResponse = new GetResponseModel(allUsers, "No users were found...");
-		return new ResponseEntity<GetResponseModel>(errorResponse, HttpStatus.NOT_FOUND);
+		GetResponseModelPaginated errorResponse = new GetResponseModelPaginated(allUsers,
+				"No users were found during pagination, maybe reached limit", isNextPage, allUsers.size());
+		return new ResponseEntity<GetResponseModelPaginated>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping("/users/{email}")
@@ -104,12 +116,3 @@ public class RestApiApplication {
 		return new ResponseEntity<UpdateResponseModel>(errorResponseModel, HttpStatus.NOT_FOUND);
 	}
 }
-
-/*
- * to do
- * rest api - get by email - done
- * custom response and exception models - done
- * cud - done
- * mocking and testing
- * pagination
- */

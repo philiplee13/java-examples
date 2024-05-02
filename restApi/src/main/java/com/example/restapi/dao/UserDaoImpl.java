@@ -19,9 +19,16 @@ public class UserDaoImpl implements UserDao {
     private UserRowMapper userRowMapper = new UserRowMapper(); // so this works - but is a little inconsistent
     // should these two be in a constructor?
 
-    public List<User> getAllUsers() {
-        String sql = "SELECT * FROM test.users;";
-        return jdbcTemplate.query(sql, userRowMapper);
+    public Integer getCountOfAllRows() {
+        String sql = "SELECT COUNT(*) from test.users;";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+    public List<User> getAllUsers(String size, String page) {
+        Integer intPageSize = Integer.parseInt(size);
+        Integer intPageNumber = Integer.parseInt(page);
+        String sql = "SELECT * FROM test.users order by email limit ? offset ?";
+        return jdbcTemplate.query(sql, userRowMapper, intPageSize, intPageNumber);
     }
 
     public List<User> getSingleUser(String email) {

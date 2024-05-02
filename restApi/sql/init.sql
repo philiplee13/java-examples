@@ -13,3 +13,10 @@ values ('jane', 'doe', 'janedoe@email.com');
 
 insert into test.users (first_name, last_name, email) 
 values ('john', 'smith', 'johnsmith@email.com');
+
+
+insert into test.users (first_name, last_name, email) 
+values ('teddy', 'smith', 'teddysmith@email.com');
+
+insert into test.users (first_name, last_name, email) 
+values ('sam', 'smith', 'samsmith@email.com');

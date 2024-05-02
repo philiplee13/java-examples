@@ -16,8 +16,12 @@ public class UserService {
         this.userDaoImpl = userDaoImpl;
     }
 
-    public List<User> getUsers() {
-        return userDaoImpl.getAllUsers();
+    public Integer getCountOfAllUsers() {
+        return userDaoImpl.getCountOfAllRows();
+    }
+
+    public List<User> getUsers(String size, String page) {
+        return userDaoImpl.getAllUsers(size, page);
     }
 
     public List<User> getSingleUser(String email) {

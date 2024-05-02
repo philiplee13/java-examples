@@ -14,9 +14,12 @@ import com.example.restapi.domain.User;
 
 public interface UserDao {
 
+    // method to get count of all users
+    Integer getCountOfAllRows();
+
     // GET
     // method to get all users
-    List<User> getAllUsers();
+    List<User> getAllUsers(String size, String page);
 
     // method to get individual user based on email
     List<User> getSingleUser(String email);

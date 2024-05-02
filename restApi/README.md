@@ -1,8 +1,6 @@
-## Java restful api
-- built with spring boot
-- will include pagination
-- unit tests
-- integration tests
+## Warning
+- the following code isn't meant to be production ready - just for learning
+- use at own risk
 
 ### REST API
 - Split into few different directories
@@ -13,8 +11,9 @@
     - domain
         - `User.java` -> should be all the columns we want from the database
     - exceptions
-        - `GenericResponseModel.java` -> generic response model that includes data, string message, and pagination
-        - Should also hold any custom exceptions that we want to throw as well
+        - `GetResponseModel.java` -> response model for GET calls
+        - `GetResponseModelPaginated.java` -> paginated response for GET
+        - `UpdateResponseMOdel.java` -> response model for PATCH, PUT, DELETE calls
     - service
         - `UserService.java` -> service that's called from the endpoint, and then calls the `UserDaoImpl.java`
 - To run...
