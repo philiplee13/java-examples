@@ -1,0 +1,9 @@
+# pretty bare bones version - there's the bitname image that we can use that
+# has more config as well
+
+version: "3"
+services:
+  kafka:
+    image: 'apache/kafka:latest'
+    ports:
+      - '9092:9092'

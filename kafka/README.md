@@ -4,7 +4,7 @@
 
 
 
-## Getting started with cli first
+## Getting started with cli first and not using docker
 - Let's first walk through a few basic examples using their shell scripts
 - So first we'll need to install [kafka](https://kafka.apache.org/quickstart#quickstart_download)
 - Once you download it - unzip and you should end up with a repo for kafka
@@ -29,6 +29,10 @@
         - then in the other terminal, run `bin/kafka-console-consumer.sh --topic <topic-name> --from-beginning --bootstrap-server localhost:9092`
             - this will be your terminal to read each message
 
+## using docker to bring up kafka
+- this just uses the image from `apache/kafka`, so pretty barebones
+- there's alot that we can probably config, but we'll add those as we learn
+- `docker-compose.yaml` -> `docker-compose up -d`
 
 
 ## Spring boot application layout
